@@ -208,8 +208,8 @@ username = ""
 apikey = ""
 if __name__ == "__main__":
     filename = argv[1]
-    f1 = open(filename)
-    f2 = open(filename+".segmented.txt", "w")
+    f1 = open(filename, encoding="utf8")
+    f2 = open(filename+".segmented.txt", "w", encoding="utf8")
     articutTaigi = ArticutTG(username, apikey)
     for line in f1:
         resultDICT = articutTaigi.parse(line, level="lv2", convert="TL")
