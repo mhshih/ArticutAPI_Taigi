@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
 from ArticutAPI import Articut
@@ -203,14 +202,18 @@ class ArticutTG:
             resultDICT["utterance"] = "╱".join(resultLIST)
             return resultDICT
 
-
-
+from sys import argv
+#from sys import stdin
+username = ""
+apikey = ""
 if __name__ == "__main__":
-    #台語漢字 CWS/POS TEST
-    #inputSTR = "阮真歡迎 Ta̍k-ke 做伙來做台灣語言"
-    #inputSTR = "台語線頂字典主要 le-ê 用途是"
-    inputSTR = "台灣語言,大寒時節ê台語線頂字典"
-    #inputSTR = "大寒時節"
-    articutTaigi = ArticutTG()
-    resultDICT = articutTaigi.parse(inputSTR, level="lv3", convert="TL")
-    pprint(resultDICT)
+    filename = argv[1]
+    f1 = open(filename)
+    f2 = open(filename+".segmented.txt", "w")
+    articutTaigi = ArticutTG(username, apikey)
+    for line in f1:
+        resultDICT = articutTaigi.parse(line, level="lv2", convert="TL")
+        segmented = resultDICT['result_segmentation']
+        print(" ".join(segmented.split('/')))
+        f2.write(" ".join(segmented.split('/')))
+    f2.close()
