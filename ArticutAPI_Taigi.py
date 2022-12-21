@@ -217,8 +217,13 @@ for filename in os.listdir(dirname):
         f2 = open(dirname+filename+".segmented.txt", "w", encoding="utf8")
         
         for line in f1:
-            resultDICT = articutTaigi.parse(line, level="lv2", convert="TL")
-            segmented = resultDICT['result_segmentation']
-            print(" ".join(segmented.split('/')))
-            f2.write(" ".join(segmented.split('/')))
-        f2.close()
+            try:
+                if line != "\n":
+                    resultDICT = articutTaigi.parse(line, level="lv2", convert="TL")
+                    segmented = resultDICT['result_segmentation']
+                    print(" ".join(segmented.split('/')))
+                    f2.write(" ".join(segmented.split('/')))
+            except:
+                pass
+         f2.close()
+        
