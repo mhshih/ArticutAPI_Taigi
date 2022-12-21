@@ -207,6 +207,7 @@ from sys import argv
 #from sys import stdin
 username = ""
 apikey = ""
+articutTaigi = ArticutTG(username, apikey)
 
 import os
 dirname = "dataCollection\\"
@@ -215,7 +216,6 @@ for filename in os.listdir(dirname):
         f1 = open(dirname+filename, encoding="utf8")
         f2 = open(dirname+filename+".segmented.txt", "w", encoding="utf8")
         
-        articutTaigi = ArticutTG(username, apikey)
         for line in f1:
             resultDICT = articutTaigi.parse(line, level="lv2", convert="TL")
             segmented = resultDICT['result_segmentation']
