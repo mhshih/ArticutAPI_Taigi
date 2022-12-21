@@ -10,6 +10,7 @@ import tempfile
 from sys import argv
 username = ""
 apikey = ""
+articutTaigi = Articut(username, apikey)
 
 import os
 dirname = "dataCollection\\"
@@ -18,7 +19,6 @@ for filename in os.listdir(dirname):
         try:
             f1 = open(dirname+filename, encoding="utf8")
             f2 = open(dirname+filename+".segmented.txt", "w", encoding="utf8")
-            articutTaigi = Articut(username, apikey)
             for line in f1:
                 resultDICT = articutTaigi.parse(line, level="lv2")
                 segmented = resultDICT['result_segmentation']
